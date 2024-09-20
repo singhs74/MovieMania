@@ -1,0 +1,40 @@
+#background-image{
+    background-image: url("cinema.jpg"), linear-gradient(to top, red, blue);
+    position: relative;
+    background-position: center;
+    height: 400px;
+    width: 100%;
+    background-size: 500px 400px, auto;
+    background-repeat: no-repeat;
+}
+
+input[type=text]{
+    width: 900px;
+    height: 30px;
+    border: 2px solid blue;
+    border-radius: 50px;
+    font-size: 14px;
+    background-color: white;
+    color: black;
+    background-repeat: no-repeat;
+    padding: 15px 10px;
+    
+
+}
+#search-bar{
+    position: absolute;
+    left: calc(50% - 450px);
+    top: 250px;
+}
+#login{
+    margin-left: auto;
+}
+.navbar-nav{
+    width: 100%;
+}
+#submit{
+    position: relative;
+    right: 69px;
+    border-radius: 30px;
+    height: 30px;
+}
