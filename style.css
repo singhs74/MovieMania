@@ -11,7 +11,7 @@
 input[type=text]{
     width: 900px;
     height: 30px;
-    border: 2px solid blue;
+    border: 2px solid black;
     border-radius: 50px;
     font-size: 14px;
     background-color: white;
@@ -28,13 +28,75 @@ input[type=text]{
 }
 #login{
     margin-left: auto;
+    
+}
+#signup{
+    padding-right: 10px;
 }
 .navbar-nav{
     width: 100%;
 }
 #submit{
     position: relative;
-    right: 69px;
+    right: 71px;
     border-radius: 30px;
     height: 30px;
+    border-color: grey;
+    
 }
+
+
+/* login */
+
+
+.login-background{
+      font-family: Arial, sans-serif;
+	  
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;
+	  justify-content: center;
+	  height: 100vh;
+}
+
+.login-container, .log-container {
+    background: lightgray;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+  }
+  .login-container input, .log-container input {
+    width: 95%; /* Adjusted width to 95% */
+    padding: 9px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+  }
+  .login-container button, .log-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: blueviolet;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .log-container {
+    display: none;
+  }
+  .log-container ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  .log-container ul li {
+    background: #e9ecef;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  .total-time {
+    margin-top: 10px;
+    font-weight: bold;
+  }

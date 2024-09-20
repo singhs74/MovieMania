@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Movie Mania Account Login</title>
+</head>
+<body>
+    
+    
+
+
+<div class="login-background">
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <input type="text" id="lastName" placeholder="Last Name">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+        <p id="errorMessage" style="color: red; display: none;">Invalid login. Please try again.</p>
+      </div>
+      <div class="log-container">
+        <h2>Work Log</h2>
+        <ul id="logList"></ul>
+        <p class="total-time" id="totalTime"></p>
+        <button onclick="logout()">Logout</button>
+      </div>
+</div>    
+</body>
+</html>
