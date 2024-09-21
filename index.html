@@ -11,6 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <!-- css stylesheet -->
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js"></script>
 
 </head>
 
@@ -84,6 +85,24 @@
     
 
 
+</div>
+
+<!-- movie containers for main page. Obtained from canvas -->
+<div class="movie-container" id="movieContainer"></div>
+
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2 id="modalTitle"></h2>
+    <img id="modalImage" src="" alt="Movie Poster" style="width: 100%; border-radius: 10px;">
+    <h3>Overview:</h3>
+    <p id="modalOverview"></p>
+    <h3>Release Date:</h3>
+    <p id="modalReleaseDate"></p>
+    <h3>Rating:</h3>
+    <p id="modalRating"></p>
+    <button onclick="saveMovie()" class="save-button">Save</button>
+  </div>
 </div>
 
 </body>

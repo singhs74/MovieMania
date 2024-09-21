@@ -1,0 +1,9 @@
+#login-page-background{
+    background-image: url("cinema.jpg"), linear-gradient(to top, red, blue);
+    /* position: relative; */
+    /* background-position: left; */
+    height: 100%;
+    width: 100%;
+    background-size: 500px 400px, auto;
+    /* background-repeat: no-repeat; */
+}
