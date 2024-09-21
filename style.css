@@ -1,30 +1,48 @@
 #background-image{
     background-image: url("cinema.jpg"), linear-gradient(to top, red, blue);
-    position: relative;
-    background-position: center;
+    /* position: relative; */
+    /* background-position: left; */
     height: 400px;
     width: 100%;
     background-size: 500px 400px, auto;
-    background-repeat: no-repeat;
+    /* background-repeat: no-repeat; */
 }
+/* background banner */
+#background-image h2{
+  position: relative;
+  left: 60px;
+  top: 25px;
+  color: white;
+  font-size: 50px;
+  font-weight: bold;
+  font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+#background-image h3{
+  position: relative;
+  left: 120px;
+  top: 20px;
+  font-size: 40px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  color:white;
+} 
 
+/* search bar */
 input[type=text]{
     width: 900px;
-    height: 30px;
-    border: 2px solid black;
+    height: 45px;
+    border: 1px solid black;
     border-radius: 50px;
-    font-size: 14px;
+    font-size: 20px;
     background-color: white;
-    color: black;
+    color: grey;
     background-repeat: no-repeat;
-    padding: 15px 10px;
-    
-
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;  
 }
 #search-bar{
     position: absolute;
     left: calc(50% - 450px);
-    top: 250px;
+    top: 300px;
 }
 #login{
     margin-left: auto;
@@ -38,10 +56,12 @@ input[type=text]{
 }
 #submit{
     position: relative;
-    right: 71px;
-    border-radius: 30px;
-    height: 30px;
+    right: 74px;
+    bottom: 2px;
+    border-radius: 50px;
+    height: 40px;
     border-color: grey;
+    font-family: Arial, Helvetica, sans-serif;
     
 }
 
