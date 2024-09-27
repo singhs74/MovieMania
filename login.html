@@ -12,7 +12,7 @@
 </head>
 <body>
 
-  <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
     <div class="container-fluid">
         <img src="logo.png" height="50px" width="50px">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -26,23 +26,39 @@
                     <a class="nav-link" aria-current="page" href="index.html">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">TV Shows</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Movies
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Now Playing</a></li>
+                            <li><a class="dropdown-item" href="#">Popular</a></li>
+                            <li><a class="dropdown-item" href="#">Top Rated</a></li>
+                            <li><a class="dropdown-item" href="#">Upcoming</a></li>
+                        </ul>
+                    </li>
                 </li>
                 
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        Movies
+                        Genres
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Adventure</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Thriller</a></li>
-                        <li><a class="dropdown-item" href="#">Comedy</a></li>
+                            <li><a class="dropdown-item" href="#">Adventure</a></li>
+                            <li><a class="dropdown-item" href="#">Thriller</a></li>
+                            <li><a class="dropdown-item" href="#">Comedy</a></li>
+                            <li><a class="dropdown-item" href="#">Drama</a></li>
+                            <li><a class="dropdown-item" href="#">Crime</a></li>
+                            <li><a class="dropdown-item" href="#">War</a></li>
+                            <li><a class="dropdown-item" href="#">Science Fiction</a></li>
+                            <li><a class="dropdown-item" href="#">Western</a></li>
+                            <li><a class="dropdown-item" href="#">Horror</a></li>
+                            <li><a class="dropdown-item" href="#">Mystery</a></li>
+                            <li><a class="dropdown-item" href="#">Animation</a></li>
                     </ul>
                 </li>
                 <li class="nav-item" id="login">
@@ -51,16 +67,14 @@
                 <li class="nav-item" id="signup">
                     <a class="nav-link" aria-current="page" href="signup.html">Sign Up</a>
                 </li>
+                <li class="nav-item" id="account"></li>
+                    <a class="nav-link " aria-current="page" href="account.html">Account</a>
+                </li>
                 
 
 
             </ul>
-            <!--search bar-->
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-danger" type="submit">Search</button>
-            </form>
-            <!-- script needed for top nav search bar -->
+            
         </div>
         
     </div>
