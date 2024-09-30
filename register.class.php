@@ -20,11 +20,11 @@ class RegisterUser{
 
         $this->stored_users = json_decode(file_get_contents($this->storage), true);
 
-        $this->new_user = {
+        $this->new_user = [
            "username" => $this->username,
            "password" => $this->encrypted_password, 
-        };
-
+        ];
+    
         if($this->checkFieldValues()){
             $this->insertUser();
         }
@@ -42,7 +42,7 @@ class RegisterUser{
             return true;
         }
         }
-    }
+    
 
 
     private function usernameExists(){
