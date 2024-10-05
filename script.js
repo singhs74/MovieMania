@@ -4,6 +4,9 @@ const apiUrl = 'https://api.themoviedb.org/3'; //change api url
 const imageBaseUrl = 'https://image.tmdb.org/t/p/w500'; //change imageBaseUrl
 let pageNumber = 1;
 let movieName;
+var myRating = '<div><span id="star1" class="fa fa-star" style="color:blue;" onclick="starRating(1)"></span><span id="star2" class="fa fa-star" style="color:blue;" onclick="starRating(2)"></span><span id="star3" class="fa fa-star" style="color:blue;" onclick="starRating(3)"></span><span id="star4" class="fa fa-star" style="color:blue;" onclick="starRating(4)"></span></div>';
+
+
 
 async function fetchTopMovies() {
 	try {
@@ -154,7 +157,11 @@ async function fetchMainPageMovies(event) {
 	
 		pageNumber = 1;
 		movieName = document.getElementById("searchBox").value;
-		fetchMovies(event);	
+		fetchMovies(event);
+		clearTextFields(event);
+
+
+			
 	
 }
 async function fetchMoreMovies(event) {
@@ -174,6 +181,7 @@ async function fetchMovies(event) {
 		const data = await response.json();
 		// console.log(data);
 		displayMovies(data.results);
+
 	} catch (error) {
 		console.error(error);
 	}
@@ -182,6 +190,12 @@ async function fetchSearchMenuMovies(event) {
 	pageNumber = 1;
 	movieName = document.getElementById("search-bar-text").value;
 	fetchMovies(event);
+	clearTextFields(event);
 
-	
+}
+function clearTextFields(event)
+{
+	document.getElementById("searchBox").value = "";
+	document.getElementById("search-bar-text").value = "";
+
 }

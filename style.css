@@ -8,18 +8,20 @@
     /* background-repeat: no-repeat; */
 }
 
-/* background banner */
+/* background word banner */
 #background-image h2{
   position: relative;
   left: 60px;
   top: 25px;
   color: white;
+  width: calc(100% - 60px);
   font-size: 50px;
   font-weight: bold;
   font-family:Verdana, Geneva, Tahoma, sans-serif
 }
 #background-image h3{
   position: relative;
+  width: calc(100% - 120px);
   left: 120px;
   top: 20px;
   font-size: 40px;
@@ -218,3 +220,8 @@ input[type=text]{
     border-color: grey;
     font-family: Arial, Helvetica, sans-serif;
   }
+
+
+
+
+  
