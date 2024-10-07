@@ -5,7 +5,7 @@ const imageBaseUrl = 'https://image.tmdb.org/t/p/w500'; //change imageBaseUrl
 let pageNumber = 1;
 let movieName;
 var myRating = '<div><span id="star1" class="fa fa-star" style="color:blue;" onclick="starRating(1)"></span><span id="star2" class="fa fa-star" style="color:blue;" onclick="starRating(2)"></span><span id="star3" class="fa fa-star" style="color:blue;" onclick="starRating(3)"></span><span id="star4" class="fa fa-star" style="color:blue;" onclick="starRating(4)"></span></div>';
-
+// let genrePageNum = 1;
 
 
 async function fetchTopMovies() {
@@ -149,6 +149,7 @@ window.onload = function () {
 	document.getElementById("submit").addEventListener("click", fetchMainPageMovies);
 	document.getElementById("load-more").addEventListener("click", fetchMoreMovies);
 	document.getElementById("search-bar-button").addEventListener("click", fetchSearchMenuMovies);
+	// document.getElementById("dropdown-item").addEventListener("click", fetchMovieGenres);
 
 
 };
@@ -177,10 +178,14 @@ async function fetchMovies(event) {
 		// console.log(event);
 		// console.log(movieName);
 		const response = await fetch(`${apiUrl}/search/movie?query=${movieName}&api_key=${apiKey}&language=en-US&page=${pageNumber}`);
+		// const genreResponse = await fetch(`${apiUrl}/3/discover/movie?api_key=${apiKey}with_genres=28`);
+		
 		// console.log(response);
 		const data = await response.json();
+		// const genreData = await genreResponse.json();
 		// console.log(data);
 		displayMovies(data.results);
+		// displayMovies(genreResponse.results)
 
 	} catch (error) {
 		console.error(error);
@@ -199,3 +204,11 @@ function clearTextFields(event)
 	document.getElementById("search-bar-text").value = "";
 
 }
+
+// async function fetchMovieGenres(event) {
+// 	genrePageNum = 1;
+// 	movieGenre = document.getElementById("dropdown-item").value;
+// 	fetchMovies(event);
+
+	
+// }

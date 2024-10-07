@@ -48,6 +48,17 @@ input[type=text]{
     top: 300px;
 }
 
+.logo{
+  width: 4em;
+  height: 4em;
+}
+
+
+.header-icons{
+  width: 3em;
+  height: 3em;
+}
+
 /* nav bar login and signup adjustments*/
 #login{
     margin-left: auto;
@@ -58,7 +69,33 @@ input[type=text]{
 }
 .navbar-nav{
     width: 100%;
+    align-items: center;
 }
+
+#signup .nav-link, #account .nav-link{
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width:1045px) {
+  #search-bar{
+    display: none;
+  }
+  .navbar-nav{
+    /* align-items: flex-start; */
+    flex-direction: row;
+  
+  }
+  .nav-link{
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .logo{
+    margin-top: 10px;
+  }
+}
+
+
 
 /* submit button for main search bar */
 #submit{
