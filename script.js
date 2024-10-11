@@ -11,10 +11,12 @@ var myRating = '<div><span id="star1" class="fa fa-star" style="color:blue;" onc
 
 async function fetchTopMovies() {
 	try {
-		const response = await fetch(`${apiUrl}/movie/top_rated?api_key=${apiKey}&language=en-US&page=1`);
+		const response = await fetch(`${apiUrl}/movie/now_playing?api_key=${apiKey}&language=en-US&page=1`);
 
 		const data = await response.json();
 		displayMovies(data.results);
+		document.getElementById("load-more").style.display = "none";
+
 	} catch (error) {
 		console.error(error);
 	}
@@ -146,11 +148,12 @@ window.onclick = function (event) {
 
 // Fetch and display top movies when the page loads
 window.onload = function () {
-	fetchTopMovies();
 	document.getElementById("submit").addEventListener("click", fetchMainPageMovies);
 	document.getElementById("load-more").addEventListener("click", fetchMoreMovies);
 	document.getElementById("search-bar-button").addEventListener("click", fetchSearchMenuMovies);
 	document.getElementById("genres").addEventListener("click", fetchGenreMovies);
+	fetchTopMovies();
+
 
 
 };
@@ -163,21 +166,20 @@ async function fetchMainPageMovies(event) {
 		moviePath = "search/movie";
 		fetchMovies(event);
 		clearTextFields(event);
-
-
-			
+	
 	
 }
 async function fetchMoreMovies(event) {
 		pageNumber++;
 		fetchMovies(event);
-		
-		
+			
 }
 
 async function fetchMovies(event) {
 	try {
 		event.preventDefault();
+		document.getElementById("load-more").style.display = "block";
+
 		// console.log(event);
 		// console.log(movieName);
 
