@@ -3,7 +3,8 @@ const apiKey = '1528ea74a96a768b3b55d9ec1a2865d8'; //change api key
 const apiUrl = 'https://api.themoviedb.org/3'; //change api url
 const imageBaseUrl = 'https://image.tmdb.org/t/p/w500'; //change imageBaseUrl
 let pageNumber = 1;
-let movieName;
+let movieParams;
+let moviePath;
 var myRating = '<div><span id="star1" class="fa fa-star" style="color:blue;" onclick="starRating(1)"></span><span id="star2" class="fa fa-star" style="color:blue;" onclick="starRating(2)"></span><span id="star3" class="fa fa-star" style="color:blue;" onclick="starRating(3)"></span><span id="star4" class="fa fa-star" style="color:blue;" onclick="starRating(4)"></span></div>';
 // let genrePageNum = 1;
 
@@ -149,7 +150,7 @@ window.onload = function () {
 	document.getElementById("submit").addEventListener("click", fetchMainPageMovies);
 	document.getElementById("load-more").addEventListener("click", fetchMoreMovies);
 	document.getElementById("search-bar-button").addEventListener("click", fetchSearchMenuMovies);
-	// document.getElementById("dropdown-item").addEventListener("click", fetchMovieGenres);
+	document.getElementById("genres").addEventListener("click", fetchGenreMovies);
 
 
 };
@@ -157,7 +158,9 @@ window.onload = function () {
 async function fetchMainPageMovies(event) {
 	
 		pageNumber = 1;
-		movieName = document.getElementById("searchBox").value;
+		const movieName = document.getElementById("searchBox").value;
+		movieParams = `query=${movieName}`;
+		moviePath = "search/movie";
 		fetchMovies(event);
 		clearTextFields(event);
 
@@ -177,8 +180,11 @@ async function fetchMovies(event) {
 		event.preventDefault();
 		// console.log(event);
 		// console.log(movieName);
-		const response = await fetch(`${apiUrl}/search/movie?query=${movieName}&api_key=${apiKey}&language=en-US&page=${pageNumber}`);
-		// const genreResponse = await fetch(`${apiUrl}/3/discover/movie?api_key=${apiKey}with_genres=28`);
+
+		// const response = await fetch(`${apiUrl}/discover/movie?api_key=${apiKey}&with_genres=${genreID}`);
+
+		// const response = await fetch(`${apiUrl}/search/movie?query=${movieName}&api_key=${apiKey}&language=en-US&page=${pageNumber}`);
+		const response = await fetch(`${apiUrl}/${moviePath}?api_key=${apiKey}&${movieParams}&language=en-US&page=${pageNumber}`);
 		
 		// console.log(response);
 		const data = await response.json();
@@ -193,7 +199,9 @@ async function fetchMovies(event) {
 }
 async function fetchSearchMenuMovies(event) {
 	pageNumber = 1;
-	movieName = document.getElementById("search-bar-text").value;
+	const movieName = document.getElementById("search-bar-text").value;
+	movieParams = `query=${movieName}`;
+	moviePath = "search/movie";
 	fetchMovies(event);
 	clearTextFields(event);
 
@@ -212,3 +220,14 @@ function clearTextFields(event)
 
 	
 // }
+
+async function fetchGenreMovies(event){
+	let genreID = event.target.dataset.id;
+	pageNumber = 1;
+	movieParams = `with_genres=${genreID}`;
+	moviePath = "discover/movie";
+	fetchMovies(event);
+	clearTextFields(event);
+
+
+}

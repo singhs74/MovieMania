@@ -57,6 +57,7 @@ input[type=text]{
 .header-icons{
   width: 3em;
   height: 3em;
+  
 }
 
 /* nav bar login and signup adjustments*/
@@ -84,6 +85,7 @@ input[type=text]{
   .navbar-nav{
     /* align-items: flex-start; */
     flex-direction: row;
+
   
   }
   .nav-link{

@@ -19,9 +19,9 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+ <!--page header-->
+ <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
     <div class="container-fluid">
-        <img src="logo.png" height="50px" width="50px">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -30,7 +30,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                    <a href="index.html" aria-current="page"><img src="logo.png" class="logo"></a>
+
+                    <!-- <a href="index.html" aria-current="page"><img src="house.svg" height="40px" width="40px" class="header-icons"></a> -->
+                     
                 </li>
                 <li class="nav-item">
                     <li class="nav-item dropdown">
@@ -55,33 +58,39 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Adventure</a></li>
-                            <li><a class="dropdown-item" href="#">Thriller</a></li>
-                            <li><a class="dropdown-item" href="#">Comedy</a></li>
-                            <li><a class="dropdown-item" href="#">Drama</a></li>
-                            <li><a class="dropdown-item" href="#">Crime</a></li>
-                            <li><a class="dropdown-item" href="#">War</a></li>
-                            <li><a class="dropdown-item" href="#">Science Fiction</a></li>
-                            <li><a class="dropdown-item" href="#">Western</a></li>
-                            <li><a class="dropdown-item" href="#">Horror</a></li>
-                            <li><a class="dropdown-item" href="#">Mystery</a></li>
-                            <li><a class="dropdown-item" href="#">Animation</a></li>
+                        <li><a class="dropdown-item" href="#">Adventure</a></li>
+                        <li><a class="dropdown-item" href="#">Thriller</a></li>
+                        <li><a class="dropdown-item" href="#">Comedy</a></li>
+                        <li><a class="dropdown-item" href="#">Drama</a></li>
+                        <li><a class="dropdown-item" href="#">Crime</a></li>
+                        <li><a class="dropdown-item" href="#">War</a></li>
+                        <li><a class="dropdown-item" href="#">Science Fiction</a></li>
+                        <li><a class="dropdown-item" href="#">Western</a></li>
+                        <li><a class="dropdown-item" href="#">Horror</a></li>
+                        <li><a class="dropdown-item" href="#">Mystery</a></li>
+                        <li><a class="dropdown-item" href="#">Animation</a></li>
+
                     </ul>
                 </li>
                 <li class="nav-item" id="login">
-                    <a class="nav-link " aria-current="page" href="login.html">Login</a>
+                    <!-- <a class="nav-link " aria-current="page" href="login.html">Login</a> -->
                 </li>
                 <li class="nav-item" id="signup">
-                    <a class="nav-link" aria-current="page" href="signup.html">Sign Up</a>
+                    <a class="nav-link" aria-current="page" href="signup.html"><img src="person-plus.svg" class="header-icons"><span>Sign Up</span></a>
                 </li>
-                <li class="nav-item" id="account"></li>
-                    <a class="nav-link " aria-current="page" href="account.html">Account</a>
+                <li class="nav-item" id="account">
+                    <a class="nav-link " aria-current="page" href="login.html"><img src="person.svg" class="header-icons"><span>Login</span></a>
                 </li>
                 
 
 
             </ul>
-            
+            <!--search bar-->
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-bar-text">
+                <button class="btn btn-outline-danger" type="submit" id="search-bar-button">Search</button>
+            </form>
+            <!-- script needed for top nav search bar -->
         </div>
         
     </div>
