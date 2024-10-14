@@ -27,43 +27,8 @@
                         <!-- <a href="index.html" aria-current="page"><img src="house.svg" height="40px" width="40px" class="header-icons"></a> -->
                          
                     </li>
-                    <li class="nav-item">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Movies
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Now Playing</a></li>
-                                <li><a class="dropdown-item" href="#">Popular</a></li>
-                                <li><a class="dropdown-item" href="#">Top Rated</a></li>
-                                <li><a class="dropdown-item" href="#">Upcoming</a></li>
-                            </ul>
-                        </li>
-                    </li>
+                    <li class="nav-item"> </li>
                     
-    
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Genres
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Adventure</a></li>
-                            <li><a class="dropdown-item" href="#">Thriller</a></li>
-                            <li><a class="dropdown-item" href="#">Comedy</a></li>
-                            <li><a class="dropdown-item" href="#">Drama</a></li>
-                            <li><a class="dropdown-item" href="#">Crime</a></li>
-                            <li><a class="dropdown-item" href="#">War</a></li>
-                            <li><a class="dropdown-item" href="#">Science Fiction</a></li>
-                            <li><a class="dropdown-item" href="#">Western</a></li>
-                            <li><a class="dropdown-item" href="#">Horror</a></li>
-                            <li><a class="dropdown-item" href="#">Mystery</a></li>
-                            <li><a class="dropdown-item" href="#">Animation</a></li>
-
-                        </ul>
-                    </li>
                     <li class="nav-item" id="login">
                         <!-- <a class="nav-link " aria-current="page" href="login.html">Login</a> -->
                     </li>
@@ -77,20 +42,82 @@
     
     
                 </ul>
-                <!--search bar-->
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-bar-text">
-                    <button class="btn btn-outline-danger" type="submit" id="search-bar-button">Search</button>
-                </form>
-                <!-- script needed for top nav search bar -->
             </div>
             
         </div>
     </nav>
 </div>   
-<div id="login-page-background">
+    <div id="login-page-background">
 
-</div>    
+        <div id="savedMovieContainer" class="container">
+            <div class="row" id="savedMovieList"></div>
+        </div>
+
+
+    </div>
+    
+    <script>
+
+        async function getJsonArrayFromJsonBin() {
+            const response = await fetch('https://api.jsonbin.io/v3/b/66009ac7c15d220e439a53a0/latest', {
+                headers: {
+                    'X-Master-Key': '$2b$10$zhqQdXWQew55ytBi6tw5teLZTtv2I49Bx0K2R7XG.8DdZ.tlirKxC',
+                },
+            });
+
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch data:', response.statusText);
+            }
+
+            const data = await response.json();
+            console.log(data);
+            return data.record;
+        }
+
+        window.onclick = function (event) {
+            const modal = document.getElementById('myModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        async function displaySavedMovies() {
+            try {
+                const savedMovies = await getJsonArrayFromJsonBin();
+                const savedMovieList = document.getElementById('savedMovieList');
+
+                if (savedMovies.length === 0) {
+                    console.log("No saved movies found");
+                    return;
+                }
+
+                savedMovies.forEach(movie => {
+                    const movieDiv = document.createElement('div');
+                    movieDiv.classList.add('col-md-4');
+                    movieDiv.innerHTML = `
+                        <div class="card mb-4">
+                            <img src="${movie.movieImage}" class="card-img-top" alt="${movie.movieTitle}">
+                            <div class="card-body">
+                                <h5 class="card-title">${movie.movieTitle}</h5>
+                                <p class="card-text">${movie.movieOverview}</p>
+                                <p><strong>Release Date:</strong> ${movie.movieReleaseDate}</p>
+                                <p><strong>Rating:</strong> ${movie.movieRating}</p>
+                            </div>
+                        </div>
+                    `;
+                    savedMovieList.appendChild(movieDiv);
+                });
+            } catch (error) {
+                console.error('Error fetching saved movies:', error);
+            }
+        }
+
+    // Call this function when the account page loads
+        window.onload = function() {
+            displaySavedMovies(); // Fetch and display saved movies
+        };
+    </script>
     
 </body>
 </html>
