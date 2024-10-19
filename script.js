@@ -3,13 +3,13 @@ const apiKey = '1528ea74a96a768b3b55d9ec1a2865d8'; //change api key
 const apiUrl = 'https://api.themoviedb.org/3'; //change api url
 const imageBaseUrl = 'https://image.tmdb.org/t/p/w500'; //change imageBaseUrl
 let pageNumber = 1;
-let movieParams;
-let moviePath;
+let movieParams = "";
+let moviePath = "";
 var myRating = '<div><span id="star1" class="fa fa-star" style="color:blue;" onclick="starRating(1)"></span><span id="star2" class="fa fa-star" style="color:blue;" onclick="starRating(2)"></span><span id="star3" class="fa fa-star" style="color:blue;" onclick="starRating(3)"></span><span id="star4" class="fa fa-star" style="color:blue;" onclick="starRating(4)"></span></div>';
 // let genrePageNum = 1;
 
 
-async function fetchTopMovies() {
+async function fetchNowPlaying() {
 	try {
 		const response = await fetch(`${apiUrl}/movie/now_playing?api_key=${apiKey}&language=en-US&page=1`);
 
@@ -58,12 +58,18 @@ function openModal(movie) {
 	const modalOverview = document.getElementById('modalOverview');
 	const modalReleaseDate = document.getElementById('modalReleaseDate');
 	const modalRating = document.getElementById('modalRating');
+	const modalStars = document.getElementById('modalStars');
+
+
+	
 
 	modalTitle.textContent = movie.title;
 	modalImage.src = `${imageBaseUrl}${movie.poster_path}`;
-	modalOverview.textContent = movie.overview;
-	modalReleaseDate.textContent = `Release Date: ${movie.release_date}`;
-	modalRating.textContent = `Rating: ${movie.vote_average}/10`;
+	modalOverview.textContent = movie.overview; 
+	modalReleaseDate.textContent = `${movie.release_date}`;
+	modalRating.innerHTML = `${movie.vote_average}/10`;
+	modalStars.innerHTML = toStars(movie.vote_average);
+
 
 	modal.style.display = 'block';
 }
@@ -74,12 +80,14 @@ function closeModal() {
 }
 
 async function saveMovie() {
+	
 	const modalTitle = document.getElementById('modalTitle').textContent;
 	const modalImage = document.getElementById('modalImage').src;
 	const modalOverview = document.getElementById('modalOverview').textContent;
 	const modalReleaseDate = document.getElementById('modalReleaseDate').textContent;
 	const modalRating = document.getElementById('modalRating').textContent;
-
+	
+	
 	const jsonData = {
 		movieTitle: modalTitle,
 		movieImage: modalImage,
@@ -152,14 +160,13 @@ window.onload = function () {
 	document.getElementById("load-more").addEventListener("click", fetchMoreMovies);
 	document.getElementById("search-bar-button").addEventListener("click", fetchSearchMenuMovies);
 	document.getElementById("genres").addEventListener("click", fetchGenreMovies);
-	fetchTopMovies();
-
-
+	document.getElementById("movies").addEventListener("click", fetchMainDropDownMovies);
+	fetchNowPlaying();
 
 };
 
+// fetches movies when searched.
 async function fetchMainPageMovies(event) {
-	
 		pageNumber = 1;
 		const movieName = document.getElementById("searchBox").value;
 		movieParams = `query=${movieName}`;
@@ -169,6 +176,7 @@ async function fetchMainPageMovies(event) {
 	
 	
 }
+// fetch additional movie pages.
 async function fetchMoreMovies(event) {
 		pageNumber++;
 		fetchMovies(event);
@@ -199,6 +207,8 @@ async function fetchMovies(event) {
 		console.error(error);
 	}
 }
+
+// fetch movies search box.
 async function fetchSearchMenuMovies(event) {
 	pageNumber = 1;
 	const movieName = document.getElementById("search-bar-text").value;
@@ -208,6 +218,7 @@ async function fetchSearchMenuMovies(event) {
 	clearTextFields(event);
 
 }
+// clear search field text boxes.
 function clearTextFields(event)
 {
 	document.getElementById("searchBox").value = "";
@@ -215,21 +226,35 @@ function clearTextFields(event)
 
 }
 
-// async function fetchMovieGenres(event) {
-// 	genrePageNum = 1;
-// 	movieGenre = document.getElementById("dropdown-item").value;
-// 	fetchMovies(event);
-
-	
-// }
-
-async function fetchGenreMovies(event){
+// fetch movies from dropdown genre menu.
+function fetchGenreMovies(event){
 	let genreID = event.target.dataset.id;
 	pageNumber = 1;
 	movieParams = `with_genres=${genreID}`;
 	moviePath = "discover/movie";
 	fetchMovies(event);
 	clearTextFields(event);
+}
+function fetchMainDropDownMovies(event){
 
+	let menuID = event.target.dataset.id;
+	moviePath = `movie/${menuID}`;
+	console.log(menuID);
+	pageNumber = 1;
+	fetchMovies(event);
+	clearTextFields(event);
 
+}
+function toStars(num){
+	let stars = Math.round(num);
+	let output = "";
+	for(let i = 1; i <= stars; i++)
+	{
+		output += '<span class="star"></span>';
+	}
+	for(let i = 1; i <= 10 - stars; i++)
+	{
+		output += '<span class="emptyStar"></span>';
+	}
+	return output;
 }

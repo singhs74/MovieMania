@@ -95,6 +95,11 @@ input[type=text]{
   .logo{
     margin-top: 10px;
   }
+  #Tmdb-div{
+    transform: translate(-30px, 0px);
+    width: 200px;
+
+  }
 }
 
 
@@ -213,10 +218,11 @@ input[type=text]{
 	  background-color: #fefefe;
 	  margin: 15% auto;
 	  padding: 20px;
+    padding-top: 45px;
 	  border: 1px solid #888;
 	  width: 50%;
 	  font-family: 'Poppins', sans-serif;
-	  font-size: 12px;
+	  font-size: 17px;
 	  border-radius: 10px;
 	  position: relative;
 	}
@@ -227,7 +233,9 @@ input[type=text]{
 
 	.close {
 	  color: #aaa;
-	  float: right;
+	  position: absolute;
+    right: 20px;
+    top: 5px;
 	  font-size: 28px;
 	  font-weight: bold;
 	}
@@ -251,6 +259,7 @@ input[type=text]{
 	  cursor: pointer;
 	}
 
+
   #load-more{
     margin: 20px;
     position: relative;
@@ -259,6 +268,28 @@ input[type=text]{
     border-color: grey;
     font-family: Arial, Helvetica, sans-serif;
   }
+#modalComment{
+  margin-bottom: 50px;
+  height: 50px;
+}
+.star::after{
+  content: "★";
+  font-size: 30px;
+}
+.emptyStar::after{
+  content: "☆";
+  font-size: 30px;
+}
+
+#Tmdb-Logo{
+  width: 300px;
+  height: 100px;
+  position: relative;
+  left: 50%;
+}
+
+
+
 
 
 

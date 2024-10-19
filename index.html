@@ -40,11 +40,11 @@
                                 aria-expanded="false">
                                 Movies
                             </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Now Playing</a></li>
-                                <li><a class="dropdown-item" href="#">Popular</a></li>
-                                <li><a class="dropdown-item" href="#">Top Rated</a></li>
-                                <li><a class="dropdown-item" href="#">Upcoming</a></li>
+                            <ul class="dropdown-menu" id="movies">
+                                <li><a class="dropdown-item" href="#" data-id="now_playing">Now Playing</a></li>
+                                <li><a class="dropdown-item" href="#" data-id="popular">Popular</a></li>
+                                <li><a class="dropdown-item" href="#" data-id="top_rated">Top Rated</a></li>
+                                <li><a class="dropdown-item" href="#" data-id="upcoming">Upcoming</a></li>
                             </ul>
                         </li>
                     </li>
@@ -79,12 +79,11 @@
                             <li><a class="dropdown-item" href="#" data-id="37">Western</a></li>
 
 
-
-
-
-
                         </ul>
                     </li>
+                    <div id="Tmdb-div">
+                    <img src="TMDB_Logo.svg" id="Tmdb-Logo">
+                    </div>
                     <li class="nav-item" id="login">
                         <!-- <a class="nav-link " aria-current="page" href="login.html">Login</a> -->
                     </li>
@@ -113,7 +112,7 @@
         <h2>Welcome to Movie Mania.</h2>
         <h3>The best place for all movie maniacs. Review now.</h3>
         <form id="search-bar">
-            <input type="text" name="search" placeholder="Search for a movie or tv show..." id="searchBox">
+            <input type="text" name="search" placeholder="Search for a movie..." id="searchBox">
             <input id="submit" type="submit" name="submit-button" value="Search">
         </form>
         <!-- script needed for main search bar -->
@@ -136,8 +135,10 @@
     <p id="modalReleaseDate"></p>
     <h3>Rating:</h3>
     <p id="modalRating"></p>
+    <p id="modalStars"></p>
+    <textarea id="modalComment"></textarea>
     
-    <button onclick="saveMovie()" class="save-button">Save</button>
+    <button onclick="saveMovie()" class="save-button" disabled>Save</button>
 
   </div>
 
