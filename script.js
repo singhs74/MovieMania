@@ -139,11 +139,13 @@ async function getJsonArrayFromJsonBin() {
 		},
 	});
 
+
 	if (!response.ok) {
 		throw new Error('Failed to fetch data:', response.statusText);
 	}
 
 	const data = await response.json();
+	console.log(data);
 	return data.record;
 }
 
@@ -258,3 +260,6 @@ function toStars(num){
 	}
 	return output;
 }
+
+
+
