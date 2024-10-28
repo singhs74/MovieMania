@@ -247,10 +247,11 @@ function fetchMainDropDownMovies(event){
 	clearTextFields(event);
 
 }
+// display star rating.
 function toStars(num){
 	let stars = Math.round(num);
 	let output = "";
-	for(let i = 1; i <= stars; i++)
+	for(let i = 1; i <= stars/2; i++)
 	{
 		output += '<span class="star"></span>';
 	}

@@ -56,9 +56,15 @@ input[type=text]{
 
 .header-icons{
   width: 3em;
-  height: 3em;
-  
+  height: 3em;  
 }
+.header-icons[img]{
+  padding-right: 10px;
+
+}
+
+
+
 
 /* nav bar login and signup adjustments*/
 #login{
@@ -285,7 +291,7 @@ input[type=text]{
   width: 300px;
   height: 100px;
   position: relative;
-  left: 50%;
+  left: 30%;
 }
 
 
