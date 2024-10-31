@@ -57,8 +57,8 @@ function openModal(movie) {
 	const modalImage = document.getElementById('modalImage');
 	const modalOverview = document.getElementById('modalOverview');
 	const modalReleaseDate = document.getElementById('modalReleaseDate');
-	const modalRating = document.getElementById('modalRating');
-	const modalStars = document.getElementById('modalStars');
+	// const modalRating = document.getElementById('modalRating');
+	// const modalStars = document.getElementById('modalStars');
 
 
 	
@@ -67,8 +67,8 @@ function openModal(movie) {
 	modalImage.src = `${imageBaseUrl}${movie.poster_path}`;
 	modalOverview.textContent = movie.overview; 
 	modalReleaseDate.textContent = `${movie.release_date}`;
-	modalRating.innerHTML = `${movie.vote_average}/10`;
-	modalStars.innerHTML = toStars(movie.vote_average);
+	// modalRating.innerHTML = `${movie.vote_average}/10`;
+	// modalStars.innerHTML = toStars(movie.vote_average);
 
 
 	modal.style.display = 'block';
@@ -247,20 +247,38 @@ function fetchMainDropDownMovies(event){
 	clearTextFields(event);
 
 }
-// display star rating.
-function toStars(num){
-	let stars = Math.round(num);
-	let output = "";
-	for(let i = 1; i <= stars/2; i++)
-	{
-		output += '<span class="star"></span>';
+
+
+/* obtained via https://www.geeksforgeeks.org/star-rating-using-html-css-and-javascript/ */
+// To access the stars
+// Funtion to update rating
+function gfg(n) {
+	let stars = 
+	document.getElementsByClassName("star");
+let output = 
+	document.getElementById("output");
+	remove();
+	// To remove the pre-applied styling
+function remove() {
+	let i = 0;
+	while (i < 5) {
+		stars[i].className = "star";
+		i++;
 	}
-	for(let i = 1; i <= 10 - stars; i++)
-	{
-		output += '<span class="emptyStar"></span>';
-	}
-	return output;
 }
+	for (let i = 0; i < n; i++) {
+		if (n == 1) cls = "one";
+		else if (n == 2) cls = "two";
+		else if (n == 3) cls = "three";
+		else if (n == 4) cls = "four";
+		else if (n == 5) cls = "five";
+		stars[i].className = "star " + cls;
+	}
+	output.innerText = "Rating is: " + n + "/5";
+}
+
+
+
 
 
 

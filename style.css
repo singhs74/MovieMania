@@ -278,14 +278,14 @@ input[type=text]{
   margin-bottom: 50px;
   height: 50px;
 }
-.star::after{
+/* .star::after{
   content: "★";
   font-size: 30px;
 }
 .emptyStar::after{
   content: "☆";
   font-size: 30px;
-}
+} */
 
 #Tmdb-Logo{
   width: 300px;
@@ -294,6 +294,36 @@ input[type=text]{
   left: 30%;
 }
 
+/* obtained via https://www.geeksforgeeks.org/star-rating-using-html-css-and-javascript/ */
+.star {
+  font-size: 40px;
+  cursor: pointer;
+}
+ 
+.one {
+  color: rgb(255, 0, 0);
+}
+ 
+.two {
+  color: rgb(255, 106, 0);
+}
+ 
+.three {
+  color: rgb(251, 255, 120);
+}
+ 
+.four {
+  color: rgb(255, 255, 0);
+}
+ 
+.five {
+  color: rgb(24, 159, 14);
+}
+
+.stars{
+  display: flex;
+  flex-direction: row;
+}
 
 
 
