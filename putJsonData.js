@@ -6,7 +6,7 @@ const putJSONData = async (updatedData) => {
 
   const url = "https://api.jsonbin.io/v3/b/" + binId;
 
-  async function updateUserData(firstName, lastName, password) {
+  async function login(firstName, lastName, password) {
     try {
         // Step 1: Fetch existing JSON data
         let jsonData = await getJSONData();
