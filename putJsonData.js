@@ -6,7 +6,7 @@ const putJSONData = async (updatedData) => {
 
   const url = "https://api.jsonbin.io/v3/b/" + binId;
 
-  async function Login(firstName, lastName, password) {
+  async function Login(firstName, lastName, password, email) {
     try {
         // Step 1: Fetch existing JSON data
         let jsonData = await getJSONData();
@@ -19,6 +19,7 @@ const putJSONData = async (updatedData) => {
             "FirstName": firstName,
             "LastName": lastName,
             "Password": password,
+            "Email": email,
             "Log_Job": [] // Initialize with an empty array for nested objects
         };
 
