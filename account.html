@@ -12,7 +12,7 @@
 <body>
 <div class="main-page">
      <!--page header-->
-     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -27,25 +27,79 @@
                         <!-- <a href="index.html" aria-current="page"><img src="house.svg" height="40px" width="40px" class="header-icons"></a> -->
                          
                     </li>
-                    <li class="nav-item"> </li>
+                    <li class="nav-item">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Movies
+                            </a>
+                            <ul class="dropdown-menu" id="movies">
+                                <li><a class="dropdown-item" href="#" data-id="now_playing">Now Playing</a></li>
+                                <li><a class="dropdown-item" href="#" data-id="popular">Popular</a></li>
+                                <li><a class="dropdown-item" href="#" data-id="top_rated">Top Rated</a></li>
+                                <li><a class="dropdown-item" href="#" data-id="upcoming">Upcoming</a></li>
+                            </ul>
+                        </li>
+                    </li>
                     
+    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Genres
+                        </a>
+                        <ul class="dropdown-menu" id="genres">
+                            <li><a class="dropdown-item" href="#" data-id="28">Action</a></li>
+                            <li><a class="dropdown-item" href="#" data-id="12">Adventure</a></li>
+                            <li><a class="dropdown-item" href="#" data-id="16">Animation</a></li>
+                            <li><a class="dropdown-item" href="#" data-id="35">Comedy</a></li>
+                            <li><a class="dropdown-item" href="#" data-id="80">Crime</a></li>
+                            <li><a class="dropdown-item" href="#" data-id="99">Documentary</a></li>
+                            <li><a class="dropdown-item" href="#" data-id="18">Drama</a></li>
+                            <li><a class="dropdown-item" href="#" data-id="10751">Family</a></li>
+                            <li><a class="dropdown-item" href="#" data-id="14">Fantasy</a></li>
+                            <li><a class="dropdown-item" href="#" data-id="36">History</a></li>
+                            <li><a class="dropdown-item" href="#" data-id="27">Horror</a></li>
+
+                            <li><a class="dropdown-item" href="#" data-id="10402">Music</a></li>
+                            <li><a class="dropdown-item" href="#" data-id="9648">Mystery</a></li>
+
+                            <li><a class="dropdown-item" href="#" data-id="10749">Romance</a></li>
+                            <li><a class="dropdown-item" href="#" data-id="878">Science Fiction</a></li>
+                            <li><a class="dropdown-item" href="#" data-id="10770">TV Movie</a></li>
+                            <li><a class="dropdown-item" href="#" data-id="53">Thriller</a></li>
+                            <li><a class="dropdown-item" href="#" data-id="10752">War</a></li>
+                            <li><a class="dropdown-item" href="#" data-id="37">Western</a></li>
+
+
+                        </ul>
+                    </li>
+                    <div id="Tmdb-div">
+                    <img src="TMDB_Logo.svg" id="Tmdb-Logo">
+                    </div>
                     <li class="nav-item" id="login">
                         <!-- <a class="nav-link " aria-current="page" href="login.html">Login</a> -->
-                    </li>
+                    </li> 
                     <li class="nav-item" id="signup">
-                        <a class="nav-link" aria-current="page" href="signup.html"><img src="person-plus.svg" class="header-icons"><span>Sign Up</span></a>
+                        <a class="nav-link" aria-current="page" href="signup.html"><img src="circle_add_account.svg" class="header-icons"><span>Sign Up</span></a>
                     </li>
                     <li class="nav-item" id="account">
-                        <a class="nav-link " aria-current="page" href="login.html"><img src="person.svg" class="header-icons"><span>Login</span></a>
+                        <a class="nav-link" aria-current="page" href="login.html"><img src="circle_account.svg" class="header-icons"><span>Login</span></a>
                     </li>
-                    
     
     
                 </ul>
+                <!--search bar-->
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-bar-text">
+                    <button class="btn btn-outline-danger" type="submit" id="search-bar-button">Search</button>
+                </form>
+                <!-- script needed for top nav search bar -->
             </div>
             
         </div>
     </nav>
+      
 </div>   
     <div id="login-page-background">
 
@@ -102,7 +156,10 @@
                                 <h5 class="card-title">${movie.movieTitle}</h5>
                                 <p class="card-text">${movie.movieOverview}</p>
                                 <p><strong>Release Date:</strong> ${movie.movieReleaseDate}</p>
-                                <p><strong>Rating:</strong> ${movie.movieRating}</p>
+                                <p><strong>${movie.movieRating}</strong></p>
+                                <textarea>${movie.movieComment}</textarea>
+                                
+
                             </div>
                         </div>
                     `;

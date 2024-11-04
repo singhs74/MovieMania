@@ -5,7 +5,7 @@ const imageBaseUrl = 'https://image.tmdb.org/t/p/w500'; //change imageBaseUrl
 let pageNumber = 1;
 let movieParams = "";
 let moviePath = "";
-var myRating = '<div><span id="star1" class="fa fa-star" style="color:blue;" onclick="starRating(1)"></span><span id="star2" class="fa fa-star" style="color:blue;" onclick="starRating(2)"></span><span id="star3" class="fa fa-star" style="color:blue;" onclick="starRating(3)"></span><span id="star4" class="fa fa-star" style="color:blue;" onclick="starRating(4)"></span></div>';
+let starRating;
 // let genrePageNum = 1;
 
 
@@ -79,13 +79,15 @@ function closeModal() {
 	modal.style.display = 'none';
 }
 
+// save a movie to the jsonbin
 async function saveMovie() {
 	
 	const modalTitle = document.getElementById('modalTitle').textContent;
 	const modalImage = document.getElementById('modalImage').src;
 	const modalOverview = document.getElementById('modalOverview').textContent;
 	const modalReleaseDate = document.getElementById('modalReleaseDate').textContent;
-	const modalRating = document.getElementById('modalRating').textContent;
+	const modalRating = document.getElementById('output').textContent;
+	const modalComment = document.getElementById('modalComment').value;
 	
 	
 	const jsonData = {
@@ -93,7 +95,8 @@ async function saveMovie() {
 		movieImage: modalImage,
 		movieOverview: modalOverview,
 		movieReleaseDate: modalReleaseDate,
-		movieRating: modalRating
+		movieRating: modalRating,
+		movieComment: modalComment
 	};
 
 	try {
@@ -155,6 +158,9 @@ window.onclick = function (event) {
 		modal.style.display = 'none';
 	}
 }
+
+
+
 
 // Fetch and display top movies when the page loads
 window.onload = function () {
@@ -274,11 +280,6 @@ function remove() {
 		else if (n == 5) cls = "five";
 		stars[i].className = "star " + cls;
 	}
-	output.innerText = "Rating is: " + n + "/5";
+	output.innerText = "Rating: " + n + "/5";
+	
 }
-
-
-
-
-
-
