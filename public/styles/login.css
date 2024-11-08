@@ -1,5 +1,5 @@
 #login-page-background{
-    background-image: url("cinema.jpg"), linear-gradient(to top, red, blue);
+    background-image: url("/public/images/cinema.jpg"), linear-gradient(to top, red, blue);
     /* position: relative; */
     /* background-position: left; */
     height: 100%;
