@@ -8,10 +8,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="login.css">
+    <script src="script.js"></script>
+
+    
     
 </head>
 <body>
-    <div class="main-page">
+<div class="main-page">
         <!--page header-->
     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div class="container-fluid">
@@ -93,34 +96,26 @@
         </div>
     </nav>
           
-<div id="login-page-background">
+    <div id="login-page-background">
           <!-- login container -->
-    <div class="login-background">
+        <div class="login-background">
 
-        <div class="login-container">
-            <h2>Sign up</h2>
-            <input type="text" id="firstname" placeholder="First Name">
-            <input type="text" id="lastName" placeholder="Last Name">
-            <input type="password" id="password" placeholder="Password">
-            <input type="email" id="email" placeholder="Email">
-            <button onclick="login()">Sign up</button>
-            <p id="errorMessage" style="color: red; display: none;">Invalid credentials. Please try again.</p>
+            <div class="login-container">
+                <h2>Sign up</h2>
+                <input type="text" id="userName" placeholder="Username">
+                <input type="password" id="password" placeholder="Password">
+                <input type="email" id="email" placeholder="Email">
+                <button onclick="signUp()">Sign up</button>
+                <p id="errorMessage" style="color: red; display: none;">Invalid credentials. Please try again.</p>
+            </div>
+
         </div>
-        <div class="log-container">
-            <h2>Work Log</h2>
-            <ul id="logList"></ul>
-            <p class="total-time" id="totalTime"></p>
-            <button onclick="logout()">Logout</button>
-        </div>
-    </div>
-        <div id="login-background-color"></div>      
+            <div id="login-background-color"></div>      
 </div>
           
            
 </div>
- <script src="connect.js"></script>
-<script src="putJsonData.js"></script>       
-    
+ 
     
 </body>
 </html>

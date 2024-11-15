@@ -15,7 +15,9 @@ async function fetchNowPlaying() {
 
 		const data = await response.json();
 		displayMovies(data.results);
-		document.getElementById("load-more").style.display = "none";
+		if (document.getElementById("load-more")) {
+			document.getElementById("load-more").style.display = "none";
+		}
 
 	} catch (error) {
 		console.error(error);
@@ -23,8 +25,12 @@ async function fetchNowPlaying() {
 }
 
 async function displayMovies(movies) {
+
 	const movieContainer = document.getElementById('movieContainer');
-	if(pageNumber == 1){
+	if (movieContainer == null) {
+		return;
+	}
+	if (pageNumber == 1) {
 		movieContainer.innerHTML = "";
 	}
 	for (const movie of movies) {
@@ -61,11 +67,11 @@ function openModal(movie) {
 	// const modalStars = document.getElementById('modalStars');
 
 
-	
+
 
 	modalTitle.textContent = movie.title;
 	modalImage.src = `${imageBaseUrl}${movie.poster_path}`;
-	modalOverview.textContent = movie.overview; 
+	modalOverview.textContent = movie.overview;
 	modalReleaseDate.textContent = `${movie.release_date}`;
 	// modalRating.innerHTML = `${movie.vote_average}/10`;
 	// modalStars.innerHTML = toStars(movie.vote_average);
@@ -79,17 +85,20 @@ function closeModal() {
 	modal.style.display = 'none';
 }
 
-// save a movie to the jsonbin
+
+
+
+// save a movie to the jsonbin. Needs to be fixed...
 async function saveMovie() {
-	
+
 	const modalTitle = document.getElementById('modalTitle').textContent;
 	const modalImage = document.getElementById('modalImage').src;
 	const modalOverview = document.getElementById('modalOverview').textContent;
 	const modalReleaseDate = document.getElementById('modalReleaseDate').textContent;
 	const modalRating = document.getElementById('output').textContent;
 	const modalComment = document.getElementById('modalComment').value;
-	
-	
+
+
 	const jsonData = {
 		movieTitle: modalTitle,
 		movieImage: modalImage,
@@ -117,7 +126,7 @@ async function saveMovie() {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
-				'X-Master-Key': '$2b$10$zhqQdXWQew55ytBi6tw5teLZTtv2I49Bx0K2R7XG.8DdZ.tlirKxC',
+				'X-Master-Key': '$2b$10$zhqQdXWQew55ytBi6tw5teLZTtv2I49Bx0K2R7XG.8DdZ.tlirKxC', // Needs to be udated with our JSON bin master key.
 			},
 			body: JSON.stringify(existingData),
 		});
@@ -138,7 +147,7 @@ async function saveMovie() {
 async function getJsonArrayFromJsonBin() {
 	const response = await fetch('https://api.jsonbin.io/v3/b/66009ac7c15d220e439a53a0/latest', {
 		headers: {
-			'X-Master-Key': '$2b$10$zhqQdXWQew55ytBi6tw5teLZTtv2I49Bx0K2R7XG.8DdZ.tlirKxC',
+			'X-Master-Key': '$2b$10$zhqQdXWQew55ytBi6tw5teLZTtv2I49Bx0K2R7XG.8DdZ.tlirKxC', // Needs to be updated with our JSON bin master key.
 		},
 	});
 
@@ -164,31 +173,45 @@ window.onclick = function (event) {
 
 // Fetch and display top movies when the page loads
 window.onload = function () {
-	document.getElementById("submit").addEventListener("click", fetchMainPageMovies);
-	document.getElementById("load-more").addEventListener("click", fetchMoreMovies);
-	document.getElementById("search-bar-button").addEventListener("click", fetchSearchMenuMovies);
-	document.getElementById("genres").addEventListener("click", fetchGenreMovies);
-	document.getElementById("movies").addEventListener("click", fetchMainDropDownMovies);
+	if (document.getElementById("submit")) {
+		document.getElementById("submit").addEventListener("click", fetchMainPageMovies);
+
+	};
+	if (document.getElementById("load-more")) {
+		document.getElementById("load-more").addEventListener("click", fetchMoreMovies);
+
+	}
+	if (document.getElementById("search-bar-button")) {
+		document.getElementById("search-bar-button").addEventListener("click", fetchSearchMenuMovies);
+
+
+	}
+	if (document.getElementById("genres")) {
+		document.getElementById("genres").addEventListener("click", fetchGenreMovies);
+	}
+	if (document.getElementById("movies")) {
+		document.getElementById("movies").addEventListener("click", fetchMainDropDownMovies);
+	}
 	fetchNowPlaying();
 
 };
 
 // fetches movies when searched.
 async function fetchMainPageMovies(event) {
-		pageNumber = 1;
-		const movieName = document.getElementById("searchBox").value;
-		movieParams = `query=${movieName}`;
-		moviePath = "search/movie";
-		fetchMovies(event);
-		clearTextFields(event);
-	
-	
+	pageNumber = 1;
+	const movieName = document.getElementById("searchBox").value;
+	movieParams = `query=${movieName}`;
+	moviePath = "search/movie";
+	fetchMovies(event);
+	clearTextFields(event);
+
+
 }
 // fetch additional movie pages.
 async function fetchMoreMovies(event) {
-		pageNumber++;
-		fetchMovies(event);
-			
+	pageNumber++;
+	fetchMovies(event);
+
 }
 
 async function fetchMovies(event) {
@@ -203,7 +226,7 @@ async function fetchMovies(event) {
 
 		// const response = await fetch(`${apiUrl}/search/movie?query=${movieName}&api_key=${apiKey}&language=en-US&page=${pageNumber}`);
 		const response = await fetch(`${apiUrl}/${moviePath}?api_key=${apiKey}&${movieParams}&language=en-US&page=${pageNumber}`);
-		
+
 		// console.log(response);
 		const data = await response.json();
 		// const genreData = await genreResponse.json();
@@ -227,15 +250,14 @@ async function fetchSearchMenuMovies(event) {
 
 }
 // clear search field text boxes.
-function clearTextFields(event)
-{
+function clearTextFields(event) {
 	document.getElementById("searchBox").value = "";
 	document.getElementById("search-bar-text").value = "";
 
 }
 
 // fetch movies from dropdown genre menu.
-function fetchGenreMovies(event){
+function fetchGenreMovies(event) {
 	let genreID = event.target.dataset.id;
 	pageNumber = 1;
 	movieParams = `with_genres=${genreID}`;
@@ -243,7 +265,7 @@ function fetchGenreMovies(event){
 	fetchMovies(event);
 	clearTextFields(event);
 }
-function fetchMainDropDownMovies(event){
+function fetchMainDropDownMovies(event) {
 
 	let menuID = event.target.dataset.id;
 	moviePath = `movie/${menuID}`;
@@ -259,19 +281,19 @@ function fetchMainDropDownMovies(event){
 // To access the stars
 // Funtion to update rating
 function gfg(n) {
-	let stars = 
-	document.getElementsByClassName("star");
-let output = 
-	document.getElementById("output");
+	let stars =
+		document.getElementsByClassName("star");
+	let output =
+		document.getElementById("output");
 	remove();
 	// To remove the pre-applied styling
-function remove() {
-	let i = 0;
-	while (i < 5) {
-		stars[i].className = "star";
-		i++;
+	function remove() {
+		let i = 0;
+		while (i < 5) {
+			stars[i].className = "star";
+			i++;
+		}
 	}
-}
 	for (let i = 0; i < n; i++) {
 		if (n == 1) cls = "one";
 		else if (n == 2) cls = "two";
@@ -281,5 +303,95 @@ function remove() {
 		stars[i].className = "star " + cls;
 	}
 	output.innerText = "Rating: " + n + "/5";
-	
+
+}
+
+async function signUp() {
+	// Function to update data in JSONBin
+	const putJSONData = async (updatedData) => {
+		const binId = '67166105acd3cb34a89aa6af';
+		const url = `https://api.jsonbin.io/v3/b/${binId}`;
+		const headers = {
+			'Content-Type': 'application/json',
+			'X-Master-Key': '$2a$10$rNCXIUrOvgxs9vtgOefRN.NEXyPdkWJmb3u3t1x7GCvfWuzTw8Z.y' // Master Key
+		};
+
+		try {
+			console.log("Inside Try Block");
+
+			const response = await fetch(url, {
+				method: 'PUT',
+				headers: headers,
+				body: JSON.stringify({ record: updatedData })
+			});
+
+			if (!response.ok) {
+				throw new Error('Failed to update data');
+			}
+
+			const responseData = await response.json();
+			console.log('Data updated successfully:', responseData);
+			alert('Sign up successful!');
+		} catch (error) {
+			console.error('Error updating user data:', error);
+			document.getElementById('errorMessage').style.display = 'block';
+		}
+	};
+
+
+	// Function to fetch existing user data from JSONBin
+	const getJSONData = async () => {
+		const binId = '67166105acd3cb34a89aa6af';
+		const url = `https://api.jsonbin.io/v3/b/${binId}`;
+		const headers = {
+			'X-Master-Key': '$2a$10$rNCXIUrOvgxs9vtgOefRN.NEXyPdkWJmb3u3t1x7GCvfWuzTw8Z.y' // Master Key
+		};
+
+		try {
+			const response = await fetch(url, { headers: headers });
+
+			if (!response.ok) {
+				throw new Error('Failed to fetch data');
+			}
+
+			const data = await response.json();
+
+			// Ensure 'record' is an array
+			if (!Array.isArray(data.record)) {
+				// If it's not an array, initialize it as an empty array
+				return [];
+			}
+
+			return data.record; // Return the record if it's an array
+		} catch (error) {
+			console.error('Error fetching user data:', error);
+			return []; // Return an empty array if there's an error
+		}
+	};
+
+
+	const userName = document.getElementById('userName').value;
+	const password = document.getElementById('password').value;
+	const email = document.getElementById('email').value;
+
+	if (!userName || !password || !email) {
+		alert('All fields are required.');
+		return;
+	}
+
+	// Fetch existing data and add new user
+	let existingData = await getJSONData();
+
+	const newUser = {
+		"Username": userName,
+		"Password": password,
+		"Email": email,
+		"myMovies": []
+	};
+
+	existingData.push(newUser); // Now this will work if existingData is an array
+
+	// Update JSONBin with new data
+	await putJSONData(existingData);
+
 }
