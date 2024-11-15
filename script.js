@@ -409,6 +409,7 @@ async function login() {
 		alert('All fields are required.');
 		return;
 	}
+	// Check array for users.
 	let user;
 	for(let i = 0; i < existingData.length; i++){
 		user = existingData[i];
