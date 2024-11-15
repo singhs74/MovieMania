@@ -317,12 +317,11 @@ async function signUp() {
 		};
 
 		try {
-			console.log("Inside Try Block");
 
 			const response = await fetch(url, {
 				method: 'PUT',
 				headers: headers,
-				body: JSON.stringify({ record: updatedData })
+				body: JSON.stringify(updatedData)
 			});
 
 			if (!response.ok) {
@@ -339,35 +338,6 @@ async function signUp() {
 	};
 
 
-	// Function to fetch existing user data from JSONBin
-	const getJSONData = async () => {
-		const binId = '67166105acd3cb34a89aa6af';
-		const url = `https://api.jsonbin.io/v3/b/${binId}`;
-		const headers = {
-			'X-Master-Key': '$2a$10$rNCXIUrOvgxs9vtgOefRN.NEXyPdkWJmb3u3t1x7GCvfWuzTw8Z.y' // Master Key
-		};
-
-		try {
-			const response = await fetch(url, { headers: headers });
-
-			if (!response.ok) {
-				throw new Error('Failed to fetch data');
-			}
-
-			const data = await response.json();
-
-			// Ensure 'record' is an array
-			if (!Array.isArray(data.record)) {
-				// If it's not an array, initialize it as an empty array
-				return [];
-			}
-
-			return data.record; // Return the record if it's an array
-		} catch (error) {
-			console.error('Error fetching user data:', error);
-			return []; // Return an empty array if there's an error
-		}
-	};
 
 
 	const userName = document.getElementById('userName').value;
@@ -381,6 +351,12 @@ async function signUp() {
 
 	// Fetch existing data and add new user
 	let existingData = await getJSONData();
+	// Ensure 'record' is an array
+	if (!Array.isArray(existingData)) {
+		// 	// If it's not an array, initialize it as an empty array
+		existingData = [];
+	}
+	console.log(existingData);
 
 	const newUser = {
 		"Username": userName,
@@ -395,3 +371,57 @@ async function signUp() {
 	await putJSONData(existingData);
 
 }
+
+async function getJSONData() {
+
+
+	// Function to fetch existing user data from JSONBin
+	const binId = '67166105acd3cb34a89aa6af';
+	const url = `https://api.jsonbin.io/v3/b/${binId}`;
+	const headers = {
+		'X-Master-Key': '$2a$10$rNCXIUrOvgxs9vtgOefRN.NEXyPdkWJmb3u3t1x7GCvfWuzTw8Z.y' // Master Key
+	};
+
+	try {
+		const response = await fetch(url, { headers: headers });
+
+		if (!response.ok) {
+			throw new Error('Failed to fetch data');
+		}
+
+		const data = await response.json();
+
+
+
+		return data.record; // Return the record if it's an array
+	} catch (error) {
+		console.error('Error fetching user data:', error);
+		return []; // Return an empty array if there's an error
+	}
+};
+
+async function login() {
+	let existingData = await getJSONData();
+	console.log(existingData);
+	const userName = document.getElementById('username');
+	const password = document.getElementById('password');
+	if (!userName || !password) {
+		alert('All fields are required.');
+		return;
+	}
+	let user;
+	for(let i = 0; i++; i < existingData.length){
+		user = existingData[i];
+		console.log(user);
+		if(user.Username == userName.value && user.Password == password.value){
+			document.cookie = `Userid=${i}`; 
+			alert("Sucessfully logged in");
+			return;
+		}
+		
+	}
+	alert("Failed to Log in");
+
+
+}
+
