@@ -410,7 +410,7 @@ async function login() {
 		return;
 	}
 	let user;
-	for(let i = 0; i++; i < existingData.length){
+	for(let i = 0; i < existingData.length; i++){
 		user = existingData[i];
 		console.log(user);
 		if(user.Username == userName.value && user.Password == password.value){
