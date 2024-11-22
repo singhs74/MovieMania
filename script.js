@@ -92,9 +92,6 @@ function closeModal() {
 
 // save a movie to the jsonbin. Needs to be fixed...
 async function saveMovie() {
-	if(userid){
-		return;
-	}
 
 	const modalTitle = document.getElementById('modalTitle').textContent;
 	const modalImage = document.getElementById('modalImage').src;
