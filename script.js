@@ -6,6 +6,8 @@ let pageNumber = 1;
 let movieParams = "";
 let moviePath = "";
 let starRating;
+let userid = null;
+let username = null;
 // let genrePageNum = 1;
 
 
@@ -90,6 +92,9 @@ function closeModal() {
 
 // save a movie to the jsonbin. Needs to be fixed...
 async function saveMovie() {
+	if(userid){
+		return;
+	}
 
 	const modalTitle = document.getElementById('modalTitle').textContent;
 	const modalImage = document.getElementById('modalImage').src;
@@ -112,21 +117,24 @@ async function saveMovie() {
 		console.log('Attempting to save movie to library...');
 
 		// Get the existing JSON array from JSONbin.io
-		let existingData = await getJsonArrayFromJsonBin();
+		let existingData = await getJSONData();
+		const userData = existingData[userid];
+		const myMovies = userData.myMovies;
+		console.log(userData);
 
 		console.log('Existing data:', existingData);
 
 		// Append the new movie data to the existing array
-		existingData.push(jsonData);
+		myMovies.push(jsonData);
 
 		console.log('Updated data:', existingData);
 
 		// Save the updated JSON array to JSONbin.io
-		const responsePut = await fetch('https://api.jsonbin.io/v3/b/66009ac7c15d220e439a53a0', {
+		const responsePut = await fetch('https://api.jsonbin.io/v3/b/67166105acd3cb34a89aa6af', {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
-				'X-Master-Key': '$2b$10$zhqQdXWQew55ytBi6tw5teLZTtv2I49Bx0K2R7XG.8DdZ.tlirKxC', // Needs to be udated with our JSON bin master key.
+				'X-Master-Key': '$2a$10$rNCXIUrOvgxs9vtgOefRN.NEXyPdkWJmb3u3t1x7GCvfWuzTw8Z.y',
 			},
 			body: JSON.stringify(existingData),
 		});
@@ -144,22 +152,7 @@ async function saveMovie() {
 	}
 }
 
-async function getJsonArrayFromJsonBin() {
-	const response = await fetch('https://api.jsonbin.io/v3/b/66009ac7c15d220e439a53a0/latest', {
-		headers: {
-			'X-Master-Key': '$2b$10$zhqQdXWQew55ytBi6tw5teLZTtv2I49Bx0K2R7XG.8DdZ.tlirKxC', // Needs to be updated with our JSON bin master key.
-		},
-	});
 
-
-	if (!response.ok) {
-		throw new Error('Failed to fetch data:', response.statusText);
-	}
-
-	const data = await response.json();
-	console.log(data);
-	return data.record;
-}
 
 window.onclick = function (event) {
 	const modal = document.getElementById('myModal');
@@ -172,7 +165,7 @@ window.onclick = function (event) {
 
 
 // Fetch and display top movies when the page loads
-window.onload = function () {
+window.onload = async function () {
 	if (document.getElementById("submit")) {
 		document.getElementById("submit").addEventListener("click", fetchMainPageMovies);
 
@@ -192,7 +185,32 @@ window.onload = function () {
 	if (document.getElementById("movies")) {
 		document.getElementById("movies").addEventListener("click", fetchMainDropDownMovies);
 	}
+	if (document.getElementById("logout")) {
+		if(userid == null || userid == undefined){
+			document.getElementById("logout").style.visibility ="collapse";
+
+		}
+			
+	document.getElementById("logout").addEventListener("click", logout);
+	
+	}
+	
+	
 	fetchNowPlaying();
+	console.log(document.cookie);
+	userid = document.cookie
+	.split("; ")
+	.find((row) => row.startsWith("userid="))
+	?.split("=")[1];
+
+	if(userid){
+		const data = await getJSONData();
+		username = data[userid].Username
+		if (document.getElementById("signup")) {
+			document.getElementById("signup").style.display = "none";
+		}
+		document.getElementById("account").innerHTML = `<a class="nav-link" aria-current="page" href="account.html"><img src="circle_account.svg" class="header-icons"><span>${username}</span></a>`
+	}
 
 };
 
@@ -415,14 +433,23 @@ async function login() {
 		user = existingData[i];
 		console.log(user);
 		if(user.Username == userName.value && user.Password == password.value){
-			document.cookie = `Userid=${i}`; 
-			alert("Sucessfully logged in");
+			document.cookie = `userid=${i};`;
+			userid = i; 
+			console.log(document.cookie);
+			window.location = "account.html";
 			return;
 		}
 		
 	}
 	alert("Failed to Log in");
 
+
+}
+function logout(event){
+	event.preventDefault()
+	document.cookie = 'userid=;expires=' + new Date(0).toUTCString();
+	userid = null;
+	window.location = "index.html";
 
 }
 

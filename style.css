@@ -79,9 +79,10 @@ input[type=text]{
     align-items: center;
 }
 
-#signup .nav-link, #account .nav-link{
+#signup .nav-link, #account .nav-link, #logout .nav-link{
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 @media (max-width:1045px) {
