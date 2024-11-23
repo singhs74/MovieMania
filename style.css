@@ -290,7 +290,7 @@ input[type=text]{
 } */
 
 #Tmdb-Logo{
-  width: 70px;
+  width: 300px;
   height: 100px;
   position: relative;
   left: 19px;
@@ -327,17 +327,6 @@ input[type=text]{
   display: flex;
   flex-direction: row;
 }
-
-.api-logo{
-  position: relative;
-  left: 485px;
-}
-
-.rights{
-  position: relative;
-  left: 535px;
-}
-
 
 
 
