@@ -56,7 +56,7 @@ input[type=text]{
 
 .header-icons{
   width: 3em;
-  height: 3em;  
+  height: 3em;
 }
 .header-icons[img]{
   padding-right: 10px;
@@ -290,10 +290,11 @@ input[type=text]{
 } */
 
 #Tmdb-Logo{
-  width: 300px;
+  width: 70px;
   height: 100px;
   position: relative;
-  left: 30%;
+  left: 19px;
+  margin: 0px 5px 0px 5px;
 }
 
 /* obtained via https://www.geeksforgeeks.org/star-rating-using-html-css-and-javascript/ */
@@ -326,6 +327,19 @@ input[type=text]{
   display: flex;
   flex-direction: row;
 }
+
+.api-logo{
+  position: relative;
+  left: 485px;
+}
+
+.rights{
+  position: relative;
+  left: 535px;
+}
+
+
+
 
 
 
