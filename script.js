@@ -368,7 +368,7 @@ async function signUp() {
 	let existingData = await getJSONData();
 	// Ensure 'record' is an array
 	if (!Array.isArray(existingData)) {
-		// 	// If it's not an array, initialize it as an empty array
+		// If it's not an array, initialize it as an empty array
 		existingData = [];
 	}
 	console.log(existingData);
