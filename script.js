@@ -450,3 +450,176 @@ function logout(event){
 
 }
 
+async function displaySavedMovies() {
+    try {
+        const savedMovies = await getJsonArrayFromJsonBin();
+        const savedMovieList = document.getElementById('savedMovieList');
+        console.log(savedMovies);
+
+        if (savedMovies.length === 0) {
+            console.log("No saved movies found");
+            return;
+        }
+
+        // Clear existing saved movie list before displaying new data
+        savedMovieList.innerHTML = "";
+
+        savedMovies.forEach((movie, index) => {
+            const movieDiv = document.createElement('div');
+            movieDiv.classList.add('col-md-4');
+            movieDiv.innerHTML = `
+                <div class="card mb-4">
+                    <img src="${movie.movieImage}" class="card-img-top" alt="${movie.movieTitle}">
+                    <div class="card-body">
+                        <h5 class="card-title">${movie.movieTitle}</h5>
+                        <p class="card-text">${movie.movieOverview}</p>
+                        <p><strong>Release Date:</strong> ${movie.movieReleaseDate}</p>
+                        <p><strong>${movie.movieRating}</strong></p>
+                        <textarea>${movie.movieComment}</textarea>
+                        <button class="btn btn-danger delete-btn" data-index="${index}">Delete</button> <!-- Delete button -->
+                    </div>
+                </div>
+            `;
+            savedMovieList.appendChild(movieDiv);
+        });
+
+        // Attach event listeners to the delete buttons
+        const deleteButtons = document.querySelectorAll('.delete-btn');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', deleteMovie);
+        });
+    } catch (error) {
+        console.error('Error fetching saved movies:', error);
+    }
+}
+
+
+async function getJsonArrayFromJsonBin() {
+	const userid = document.cookie
+		.split("; ")
+		.find((row) => row.startsWith("userid="))
+		?.split("=")[1];
+	const response = await fetch('https://api.jsonbin.io/v3/b/67166105acd3cb34a89aa6af/latest', {
+		headers: {
+			'X-Master-Key': '$2a$10$rNCXIUrOvgxs9vtgOefRN.NEXyPdkWJmb3u3t1x7GCvfWuzTw8Z.y', //Needs to pull movies from individual user accounts in JSON bin.
+		},
+	});
+
+
+	if (!response.ok) {
+		throw new Error('Failed to fetch data:', response.statusText);
+	}
+
+	const data = await response.json();
+	const userData = data.record[userid];
+	console.log(userData);
+	return userData.myMovies;
+}
+
+window.onclick = function (event) {
+	const modal = document.getElementById('myModal');
+	if (event.target == modal) {
+		modal.style.display = 'none';
+	}
+}
+
+async function deleteMovie(event) {
+    const movieIndex = event.target.getAttribute('data-index'); // Get the index of the movie to delete
+    console.log('Deleting movie at index:', movieIndex);
+
+    // Get the user ID from cookies
+    const userid = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("userid="))
+        ?.split("=")[1];
+
+    console.log('User ID from cookie:', userid);
+
+    // Ensure that the user is logged in
+    if (!userid) {
+        console.error('No user logged in');
+        alert('You must be logged in to delete a movie.');
+        return;
+    }
+
+    // Fetch the existing user data from JSONBin
+    let existingData = await getJSONData();
+
+    // Ensure the user data and the myMovies array exist
+    const userData = existingData[userid];
+    if (!userData || !userData.myMovies) {
+        console.error('User data or myMovies array is missing');
+        alert('Something went wrong while fetching your saved movies.');
+        return;
+    }
+
+    const myMovies = userData.myMovies;
+
+    // Ensure the movie index is valid
+    if (movieIndex >= 0 && movieIndex < myMovies.length) {
+        // Remove the movie from the array
+        myMovies.splice(movieIndex, 1);
+        console.log('Movie deleted:', myMovies);
+
+        // Update the data on JSONBin
+        await updateJsonData(existingData);
+
+        // Re-render the saved movies list
+        displaySavedMovies();
+    } else {
+        console.error('Invalid movie index:', movieIndex);
+        alert('Failed to delete movie. Please try again.');
+    }
+}
+
+
+
+async function updateJsonData(updatedData) {
+    const binId = '67166105acd3cb34a89aa6af';  // JSONBin ID
+    const url = `https://api.jsonbin.io/v3/b/${binId}`;
+    const headers = {
+        'Content-Type': 'application/json',
+        'X-Master-Key': '$2a$10$rNCXIUrOvgxs9vtgOefRN.NEXyPdkWJmb3u3t1x7GCvfWuzTw8Z.y' // Master Key
+    };
+
+    try {
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: headers,
+            body: JSON.stringify(updatedData)
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to update data');
+        }
+
+        const responseData = await response.json();
+        console.log('Data updated successfully:', responseData);
+    } catch (error) {
+        console.error('Error updating user data:', error);
+    }
+}
+
+
+async function getJSONData() {
+    const binId = '67166105acd3cb34a89aa6af'; // JSONBin ID
+    const url = `https://api.jsonbin.io/v3/b/${binId}`;
+
+    const headers = {
+        'X-Master-Key': '$2a$10$rNCXIUrOvgxs9vtgOefRN.NEXyPdkWJmb3u3t1x7GCvfWuzTw8Z.y', // Master Key
+    };
+
+    try {
+        const response = await fetch(url, { headers: headers });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch data');
+        }
+
+        const data = await response.json();
+        return data.record; // Ensure we're accessing the correct part of the data
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+        return []; // Return an empty array if there's an error
+    }
+}
