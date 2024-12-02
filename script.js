@@ -476,7 +476,7 @@ async function displaySavedMovies() {
                         <p><strong>Release Date:</strong> ${movie.movieReleaseDate}</p>
                         <p><strong>${movie.movieRating}</strong></p>
                         <textarea>${movie.movieComment}</textarea>
-                        <button class="btn btn-danger delete-btn" data-index="${index}">Delete</button> <!-- Delete button -->
+                        <button class="btn btn-danger delete-btn" data-index="${index}">Delete</button>
                     </div>
                 </div>
             `;
@@ -523,6 +523,7 @@ window.onclick = function (event) {
 	}
 }
 
+//--CHATGPT--
 async function deleteMovie(event) {
     const movieIndex = event.target.getAttribute('data-index'); // Get the index of the movie to delete
     console.log('Deleting movie at index:', movieIndex);
@@ -573,7 +574,7 @@ async function deleteMovie(event) {
 }
 
 
-
+//--CHATGPT--
 async function updateJsonData(updatedData) {
     const binId = '67166105acd3cb34a89aa6af';  // JSONBin ID
     const url = `https://api.jsonbin.io/v3/b/${binId}`;
@@ -600,7 +601,7 @@ async function updateJsonData(updatedData) {
     }
 }
 
-
+//--CHATGPT--
 async function getJSONData() {
     const binId = '67166105acd3cb34a89aa6af'; // JSONBin ID
     const url = `https://api.jsonbin.io/v3/b/${binId}`;
