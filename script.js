@@ -187,7 +187,10 @@ window.onload = async function () {
 	}
 	if (document.getElementById("logout")) {
 		if(userid == null || userid == undefined){
-			document.getElementById("logout").style.visibility ="collapse";
+			document.getElementById("logout").style.visibility ="hidden";
+			document.getElementById("logout").style.position ="absolute";
+
+			
 
 		}
 			
