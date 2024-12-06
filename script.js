@@ -92,6 +92,7 @@ function closeModal() {
 
 // save a movie to the jsonbin. Needs to be fixed...
 async function saveMovie() {
+	//userid = 6;
 
 	const modalTitle = document.getElementById('modalTitle').textContent;
 	const modalImage = document.getElementById('modalImage').src;
@@ -116,10 +117,12 @@ async function saveMovie() {
 		// Get the existing JSON array from JSONbin.io
 		let existingData = await getJSONData();
 		const userData = existingData[userid];
-		const myMovies = userData.myMovies;
-		console.log(userData);
-
+		console.log(userid);
 		console.log('Existing data:', existingData);
+
+		const myMovies = userData.myMovies;
+	
+
 
 		// Append the new movie data to the existing array
 		myMovies.push(jsonData);
@@ -458,7 +461,6 @@ async function displaySavedMovies() {
 
         if (savedMovies.length === 0) {
             console.log("No saved movies found");
-            return;
         }
 
         // Clear existing saved movie list before displaying new data

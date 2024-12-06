@@ -344,6 +344,13 @@ input[type=text]{
   flex-direction: row;
 }
 
+.card-body{
+  display: flex;
+  flex-direction: column;
+}
+.card-body button{
+  margin: 10px;
+}
 
 
 
