@@ -461,6 +461,8 @@ async function displaySavedMovies() {
 
         if (savedMovies.length === 0) {
             console.log("No saved movies found");
+			savedMovieList.innerHTML = "<p>No Saved Movies Found</p>";
+			return;
         }
 
         // Clear existing saved movie list before displaying new data
