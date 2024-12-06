@@ -461,7 +461,7 @@ async function displaySavedMovies() {
 
         if (savedMovies.length === 0) {
             console.log("No saved movies found");
-			savedMovieList.innerHTML = "<p>No Saved Movies Found</p>";
+			savedMovieList.innerHTML = '<p style="height: calc(100vh - 100px)">No Saved Movies Found</p>';
 			return;
         }
 
