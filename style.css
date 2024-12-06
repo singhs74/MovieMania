@@ -108,7 +108,8 @@ input[type=text]{
   flex-grow: 1;
   display: flex;
   justify-content: space-around;
-  
+  margin-right: 17px;
+
 
 
 }
